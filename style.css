@@ -1,4 +1,4 @@
-﻿/* remove webkit object highlight */
+/* remove webkit object highlight */
 *{
   outline:none;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
@@ -30,8 +30,8 @@ body{
 
 body{
   font-family:Arial,sans-serif;
-  font-size:14px;
-  color:rgb(35,35,35);
+  font-size:13px;
+  color:rgb(50,50,50);
   background-color:rgb(230,230,230);}
 
 #app{
@@ -45,205 +45,219 @@ body{
 #app::-webkit-scrollbar-thumb{
   background-color:rgb(145,145,145);}
 
-/* input, textarea */
-input,
-textarea{
+/* input */
+input{
+  width:100%;
+  height:100%;
   font-family:Arial,sans-serif;
-  font-size:100%;
-	display:block;
+  font-size:13px;
+  display:block;
   box-sizing:border-box;
-  padding:10px 5px;
-  border:0;
-	border-bottom:1px solid rgb(200,200,200);
-	background-color:rgb(255,255,255);}
+  padding:8px 0;
+  border:0;}
 
-textarea{
-  overflow:hidden;
-  resize:none;}
+/* icons */
+.icon{
+  width:11px;
+  height:11px;
+  position:absolute;
+  box-sizing:border-box;
+  display:block;
+  stroke-width:1px;
+  stroke:rgb(50,50,50);}
 
-textarea::-webkit-scrollbar{width:0;}
+/* buttons */
+.button{
+  padding:5px 8px;
+  background-color:rgb(255,255,255);
+  font-size:90%;
+  position:relative;
+  cursor:pointer;
+  box-sizing:border-box;}
 
-input:is(:focus,:hover),
-select:is(:focus,:hover),
-textarea:is(:focus,:hover){
-	border-bottom:1px solid rgb(50,50,50);}
+@media (hover: hover){
+  .button:hover{background-color:rgb(245,245,245);}
+}
 
 .wrap{
   box-sizing:border-box;
   padding-left:10px;
   padding-right:10px;
   width:100%;
-	max-width:735px;
-	margin-left:auto;
+  max-width:735px;
+  margin-left:auto;
   margin-right:auto;}
 
 #menu{
-  display:flex;
-	color:rgb(50,50,50);
-	background-color:rgb(255,255,255);}
+  gap:0 5px;
+  display:flex;}
 
-#menu .button{
-  text-align:center;
-  flex-basis:18%;
-  color:rgb(50,50,50);
-	cursor:pointer;
-	padding:15px 20px;}
-
-#menu .button:hover{
-	color:rgb(50,50,50);
-  background-color:rgb(200,200,200);}
-
-#menu .input{
-  flex-basis:14%;
-  border-left:1px solid rgb(200,200,200);
-  padding:0;}
+#menu .item{
+  min-width:100px;
+  flex-basis:15%;}
 
 #menu input{
   width:100%;
-  min-width:100%;
-  max-width:100%;
   box-sizing:border-box;
   text-align:center;
-  height:100%;
-  padding:10px 10px;
-  border:0;}
+  padding:8px 6px;}
 
-#invHeader,
-#invBody,
-#invFooter{
+#menu input:is(:focus,:hover){
+  background-color:rgb(245,245,245);}
+
+#header,
+#body,
+#footer{
   display:block;
   box-sizing:border-box;
   position:relative;
   width:100%;}
 
-#invHeaderTop,
-#invHeaderMid{
-  margin-top:20px;}
+/* header */
+#hTop,
+#hMid{margin-top:20px;}
 
-#iTitle{font-size:150%;}
-#iNumber{padding-left:10px;}
+#hTop{
+  gap:0 5px;
+  justify-content:flex-end;
+  display:flex;}
 
-#invHeaderMid{display:flex;}
-#invHeaderMid .w50{flex-basis:50%;}
-#invHeaderMid .item{width:90%;}
-#invHeaderMid .item input{width:100%;}
-#invHeaderMid .w50:nth-child(2) .item{float:right;}
+#hTop #numDef{
+  margin-right:auto;
+  font-size:150%;}
 
-/* invoice body */
-#invBody{
-  margin-top:40px;}
+#hMid{display:flex;}
 
-#invBodyTop,
-#invBodyMid,
-#invBodyBot{
-  position:relative;
-  box-sizing:border-box;
+#hMid .block{flex-basis:45%;}
+#hMid .block:last-child{margin-left:auto;}
+
+#hMid .item input{
+  padding:8px 6px;
+  margin-bottom:5px;
   width:100%;}
 
-#invBodyTop{
+#hMid .item input:is(:focus,:hover){
+  background-color:rgb(245,245,245);}
+
+/* body */
+#body{margin-top:20px;}
+
+#bTop,
+#bMid,
+#bBot{
+  display:block;
+  position:relative;
+  width:100%;}
+
+#body .empty,
+#body .remove{
+  position:relative;
+  flex-basis:5%;}
+
+#body .remove{cursor:pointer;}
+
+#bTop{
   font-weight:bold;
   display:flex;
-  padding:10px 5px;
+  padding:8px 0;
   border-top:1px solid rgb(200,200,200);
   border-bottom:1px solid rgb(200,200,200);}
 
-#invBodyMid .item{
+#bMid .item{
+  position:relative;
+  border-bottom:1px solid rgb(200,200,200);
   box-sizing:border-box;
   display:flex;}
 
-#invBody .name{
-  flex-basis:55%;}
+#bMid .item input{background-color:transparent;}
 
-#invBody .quantity{
-  flex-basis:10%;}
+#body .icon{
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);}
 
-#invBody .quantity,
-#invBody .quantity input{
+#body .name{
+  max-width:40%;
+  flex-grow:1;
+  flex-basis:40%;}
+
+#bMid .name{
+  box-sizing:border-box;
+  padding:10px 0;}
+
+#body .units{flex-basis:10%;}
+
+#body .units,
+#body .units input{
   text-align:center;}
 
-#invBody .price{
-  position:relative;
-  flex-basis:15%;}
+#body .quantity{flex-basis:10%;}
 
-#invBody .price,
-#invBody .price input{
+#body .quantity,
+#body .quantity input{
+  text-align:center;}
+
+#body .price{flex-basis:15%;}
+
+#body .price,
+#body .price input{
   text-align:right;}
 
-#invBody .sum{
-  position:relative;
-  flex-basis:20%;}
+#body .sum{flex-basis:20%;}
 
-#invBody .sum,
-#invBody .sum input{
+#body .sum,
+#body .sum input{
   text-align:right;}
 
-#invBodyMid .sum input{
-  width:100%;}
-
-#invBodyMid .sum .cSym{
-  box-sizing:border-box;
-  border-bottom:1px solid rgb(200,200,200);
+/* rows add */
+#rowAdd{
   position:absolute;
-  top:50%;
-  right:5px;
-  transform:translateY(-50%);
-  display:block;
-  width:16px;}
+  left:5%;
+  top:5px;}
 
-#invBodyMid textarea,
-#invBodyMid input{
-  display:block;
-  width:100%;
-  max-width:100%;
-  height:100%;}
-
-/* invoice body bottom */
-#invBodyBot{
-  display:block;}
-
-#invBodyBot .item{
+/* body bottom */
+#bBot .item{
   justify-content:flex-end;
   display:flex;}
 
-#invBodyBot .title{
-  flex-basis:15%;}
-
-#invBodyBot .data{
-  flex-basis:20%;}
-
-#invBodyBot .title,
-#invBodyBot .data{
-  box-sizing:border-box;
-  border-bottom:1px solid rgb(200,200,200);
-  padding:10px 5px;
+#bBot .title,
+#bBot .data{
+  flex-basis:20%;
+  padding:8px 0;
   text-align:right;}
 
-#invBodyBot .data{
+#bBot #rTax .title,
+#bBot #rTax .data{
+  border-bottom:1px solid rgb(200,200,200);}
+
+#bBot #rTot{font-weight:bold;}
+
+#bBot .data{
   justify-content:flex-end;
   display:flex;}
 
-#invBodyBot .item#rTax{
-  display:none;}
-
-#invBodyBot .item#rTax.on{
-  display:flex;}
-
-.pCur{
-  padding-left:5px;}
+#bBot .item#rTax{display:none;}
+#bBot .item#rTax.on{display:flex;}
 
 /* footer */
-#invFooter{
+#footer{
   border-top:1px solid rgb(200,200,200);
-  margin-top:80px;
-  padding:10px 0;}
+  padding:8px 0;
+  margin-top:80px;}
 
 @media print{
   *,*:before,*:after{
-	  color:rgb(0,0,0)!important;
-	  background:transparent!important;}
+    color:rgb(0,0,0)!important;
+    background:transparent!important;}
   .wrap{
     padding-left:0!important;
     padding-right:0!important;}
+  #hMid .item input{
+    padding:4px 0;
+    margin-bottom:0!important;}
+  #invBody .empty,
+  #invBody .remove{
+    visibility:hidden;}
   .noPrint{
     display:none!important;}
 }
