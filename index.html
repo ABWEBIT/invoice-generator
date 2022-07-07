@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="utf-8">
@@ -12,32 +12,28 @@
   <div class="wrap">
 
     <section id="menu" class="noPrint">
-      <div class="button" id="print">
-	      Печатать
-	    </div>
-	    <div class="button" id="add">
-	      +Строка
-	    </div>
-	    <div class="button" id="remove">
-	      -Строка
-	    </div>
-	    <div class="button" id="refresh">
-	      Обновить
-	    </div>
-	    <div class="input">
-	      <input type="number" id="iTax" placeholder="%" value="20"/>
-	    </div>
-	    <div class="input">
-	      <input type="text" id="iCur" placeholder="€" value="€"/>
-	    </div>
+      <div class="item">
+	<input type="number" id="iTax" placeholder="Налог %"/>
+      </div>
+      <div class="item">
+	<input type="text" id="iCur" placeholder="Валюта €" value="€"/>
+      </div>
     </section>
 
-    <section id="invHeader">
-      <section id="invHeaderTop">
-        <div id="iTitle">Номер счёта:<span id="iNumber"></span></div>
+    <section id="header">
+      <section id="hTop">
+        <div id="numDef">
+          <div class="text">Номер счёта: <span id="iNumber"></span></div>
+        </div>
+        <div id="numRef" class="button noPrint">
+          <div class="text">Обновить номер</div>
+        </div>
+        <div id="invPrt" class="button noPrint">
+          <div class="text">Печатать</div>
+        </div>
       </section>
-      <section id="invHeaderMid">
-        <div class="w50">
+      <section id="hMid">
+        <div class="block">
           <div class="item">
             <input type="text" value="Получатель: Название фирмы"/>
           </div>
@@ -45,10 +41,10 @@
             <input type="text" value="Рег. номер: 123456789"/>
           </div>
           <div class="item">
-            <input type="text" value="Банк: номер счёта"/>
+            <input type="text" value="Банк: счёт"/>
           </div>
         </div>
-        <div class="w50">
+        <div class="block">
           <div class="item">
             <input type="text" value="Плательщик: Название фирмы"/>
           </div>
@@ -65,18 +61,24 @@
       </section>
     </section>
 
-    <section id="invBody">
-      <section id="invBodyTop">
+    <section id="body">
+      <section id="bTop">
+        <div class="empty"></div>
         <div class="name">Наименование</div>
+        <div class="units">Ед.</div>
         <div class="quantity">Кол-во</div>
         <div class="price">Цена</div>
         <div class="sum">Сумма</div>
       </section>
 
-      <section id="invBodyMid">
+      <section id="bMid">
         <div class="item res">
-          <div class="name">
-            <textarea class="textAreaAutoHeight" rows="1" cols="1" placeholder="Описание услуги/товара"></textarea>
+          <div class="empty"></div>
+          <div class="name" contenteditable="true">
+            Описание...
+          </div>
+          <div class="units">
+            <input type="text" class="iUni" placeholder="шт"/>
           </div>
           <div class="quantity">
             <input type="number" class="iQua fCalc" placeholder="0"/>
@@ -90,23 +92,26 @@
         </div>
       </section>
 
-      <section id="invBodyBot">
-          <div class="item" id="rTax">
-            <div class="title">Налог (<span id="pTax"></span>%): </div>
-            <div class="data">
-              <div class="2Dec" id="cTax">0</div><span class="pCur"></span>
-            </div>
+      <section id="bBot">
+        <div id="rowAdd" class="button noPrint">
+          <div class="text">Добавить строку</div>
+        </div>
+        <div class="item" id="rTax">
+          <div class="title">Налог (<span id="pTax"></span>%): </div>
+          <div class="data">
+            <div class="2Dec" id="cTax">0</div><span class="pCur"></span>
           </div>
-          <div class="item">
-            <div class="title">Итого: </div>
-            <div class="data">
-              <div class="2Dec" id="cTot">0</div><span class="pCur"></span>
-            </div>
+        </div>
+        <div class="item" id="rTot">
+          <div class="title">Итого: </div>
+          <div class="data">
+            <div class="2Dec" id="cTot">0</div><span class="pCur"></span>
           </div>
+        </div>
       </section>
     </section>
 
-    <section id="invFooter" contenteditable="true">
+    <section id="footer" contenteditable="true">
       Контакты: телефон, адрес...
     </section>
 
