@@ -1,23 +1,4 @@
-﻿'use strict';
-let textAreaAutoHeight = () => {
-  let textArea = document.getElementsByClassName('textAreaAutoHeight');
-  for(let el of textArea){ 
-    let tStyle,tHeight,tPadding,tBorder,tRowHeight;
-
-    tStyle = window.getComputedStyle(el);
-    tHeight = parseFloat(tStyle.height);
-    tPadding = parseFloat(tStyle.paddingTop) + parseFloat(tStyle.paddingBottom);
-    tBorder = parseFloat(tStyle.borderTop) + parseFloat(tStyle.borderBottom);
-    tRowHeight = tHeight - tPadding - tBorder;
-
-    el.addEventListener('input', function(){
-      this.rows = 1;
-      this.rows = Math.round((this.scrollHeight - tPadding) / tRowHeight);
-    });
-  };
-};
-textAreaAutoHeight();
-
+'use strict';
 /* date */
 let iDate = () =>{
   let nDate,nowDate,nowDay,nowMonth,nowYear,invNowDate,invNewDate;
@@ -25,10 +6,10 @@ let iDate = () =>{
   invNewDate = document.getElementById('invNewDate');
   nDate = new Date();
 
-  nowDate  = nDate;
-	nowDay   = nowDate.getDate();
-	nowMonth = nowDate.getMonth()+1;
-  nowYear  = nowDate.getFullYear();
+  nowDate = nDate;
+  nowDay = nowDate.getDate();
+  nowMonth = nowDate.getMonth()+1;
+  nowYear = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
   if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
@@ -36,14 +17,13 @@ let iDate = () =>{
 
   nDate.setDate(nDate.getDate()+7);
   nowDate = nDate;
-	nowDay   = nowDate.getDate();
-	nowMonth = nowDate.getMonth()+1;
-  nowYear  = nowDate.getFullYear();
+  nowDay = nowDate.getDate();
+  nowMonth = nowDate.getMonth()+1;
+  nowYear = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
   if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
   invNewDate.value += nowDay+'/'+nowMonth+'/'+nowYear;
-
 };
 iDate();
 
@@ -61,18 +41,18 @@ let format2Dec = () =>{
 };
 format2Dec();
 
-/* invoice number */
+/* generate invoice number */
 let invoiceNumber = () =>{
   let iNumber,d,yer,mth,day,hrs,min,sec,mil;
   iNumber = document.getElementById('iNumber');
-	d   = new Date();
+  d   = new Date();
   yer = d.getFullYear(); // not used
-	mth = d.getMonth()+1;
-	day = d.getDate();
-	hrs = d.getHours();
-	min = d.getMinutes();
-	sec = d.getSeconds();
-	mil = d.getMilliseconds();
+  mth = d.getMonth()+1;
+  day = d.getDate();
+  hrs = d.getHours();
+  min = d.getMinutes();
+  sec = d.getSeconds();
+  mil = d.getMilliseconds();
 
   if(mth.toString().length === 1){mth = '0'+mth};
   if(day.toString().length === 1){day = '0'+day};
@@ -80,7 +60,7 @@ let invoiceNumber = () =>{
   if(min.toString().length === 1){min = '0'+min};
   if(sec.toString().length === 1){sec = '0'+sec};
   mil = mil.toString().slice(0,1);
-	iNumber.innerHTML = mth+day+hrs+min+sec+mil;
+  iNumber.innerHTML = mth+day+hrs+min+sec+mil;
   document.title = mth+day+hrs+min+sec+mil;
 };
 invoiceNumber();
@@ -98,65 +78,73 @@ let calculation = () =>{
       el.querySelector('.iSum').value = s;
     }
     else el.querySelector('.iSum').value = '';
-
     let sumAll = document.querySelectorAll('.iSum');
     let cSum = 0;
-
     for(let el of sumAll){
       cSum += Number(el.value);
     };
-
     let iTax = document.getElementById('iTax').value;
     if(Number(iTax) < 1) iTax = 0;
-
     let cTax = (cSum / 100) * iTax;
     document.getElementById('cTax').innerHTML = cTax;
-
     let cTot = cSum + cTax;
     document.getElementById('cTot').innerHTML = cTot;
-
   };
-	format2Dec();
+  format2Dec();
 };
 
 let bindCalc = function (){
   let fCalc = document.getElementsByClassName('fCalc');
-
   for(let el of fCalc){
     el.addEventListener('input', function(){
       calculation();
     });
   };
-
 };
 bindCalc();
 
-/* buttons */
-let bPrint,bRefresh,bAdd,bRemove;
-bPrint = document.getElementById('print');
-bAdd = document.getElementById('add');
-bRemove = document.getElementById('remove');
-bRefresh = document.getElementById('refresh');
-
 /* print */
-bPrint.addEventListener('click',function(){
-	window.print();
-	return false;
+let invPrt = document.getElementById('invPrt');
+invPrt.addEventListener('click',function(){
+  window.print();
+  return false;
 });
 
-/* refresh */
-bRefresh.addEventListener('click',function(){
+/* refresh invoice number */
+let numRef = document.getElementById('numRef');
+numRef.addEventListener('click',function(){
   invoiceNumber();
 });
 
-/* add field */
-let invBodyMid = document.getElementById('invBodyMid');
+/* remove row */
+let removeEvent = function (){
+  let removeRow = document.getElementsByClassName('remove');
+  for(let el of removeRow){
+    el.addEventListener('click', function(){
+      this.parentElement.remove();
+      calculation();
+    });
+  };
+};
 
-bAdd.addEventListener('click',function(){
+/* add row */
+let rowAdd = document.getElementById('rowAdd');
+let bMid = document.getElementById('bMid');
+
+rowAdd.addEventListener('click',function(){
   let template =`
     <div class="item res">
-      <div class="name">
-        <textarea class="textAreaAutoHeight" rows="1" cols="1" placeholder="Описание услуги/товара"></textarea>
+      <div class="remove">
+        <svg class="icon">
+          <line x1="10%" y1="10%" x2="90%" y2="90%" />
+          <line x1="10%" y1="90%" x2="90%" y2="10%" />
+        </svg>            
+      </div>
+      <div class="name" contenteditable="true">
+        Описание...
+      </div>
+      <div class="units">
+        <input type="text" class="iUni" placeholder="шт"/>
       </div>
       <div class="quantity">
         <input type="number" class="iQua fCalc" placeholder="0"/>
@@ -169,21 +157,10 @@ bAdd.addEventListener('click',function(){
       </div>
     </div>
   `;
-  
-  invBodyMid.insertAdjacentHTML('beforeend', template);
-
-	bindCalc();
-	format2Dec();
-	textAreaAutoHeight();
-});
-
-/* remove field */
-bRemove.addEventListener('click',function(){
-  let invBodyRes = document.getElementsByClassName('res');
-  if(invBodyRes.length > 1){
-    invBodyRes[invBodyRes.length - 1].remove();
-    calculation();
-  };
+  bMid.insertAdjacentHTML('beforeend', template);
+  bindCalc();
+  format2Dec();
+  removeEvent();
 });
 
 /* currency */
@@ -204,7 +181,6 @@ bCur.addEventListener('input',function(){
 let tax = function (){
   let pTax = document.getElementById('pTax');
   let iTax = document.getElementById('iTax').value;
-
   if(iTax > 0){
     document.getElementById('rTax').classList.add('on');
     pTax.innerHTML = iTax;
@@ -219,5 +195,5 @@ tax();
 let bTax = document.getElementById('iTax');
 bTax.addEventListener('input',function(){
   tax();
-	calculation();
+  calculation();
 });
