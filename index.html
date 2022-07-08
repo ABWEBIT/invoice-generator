@@ -12,12 +12,12 @@
   <div class="wrap">
 
     <section id="menu" class="noPrint">
-      <div class="item">
-	<input type="number" id="iTax" placeholder="Налог %"/>
-      </div>
-      <div class="item">
-	<input type="text" id="iCur" placeholder="Валюта €" value="€"/>
-      </div>
+	    <div class="item">
+	      <input type="number" id="iTax" placeholder="Налог %"/>
+	    </div>
+	    <div class="item">
+	      <input type="text" id="iCur" placeholder="Валюта €" value="руб"/>
+	    </div>
     </section>
 
     <section id="header">
@@ -35,27 +35,34 @@
       <section id="hMid">
         <div class="block">
           <div class="item">
-            <input type="text" value="Получатель: Название фирмы"/>
+            <input type="text" class="name" value="Получатель:"/>
+            <input type="text" class="data" placeholder="Название фирмы"/>
           </div>
           <div class="item">
-            <input type="text" value="Рег. номер: 123456789"/>
+            <input type="text" class="name" value="Рег. номер:"/>
+            <input type="text" class="data" placeholder="123456789"/>
           </div>
           <div class="item">
-            <input type="text" value="Банк: счёт"/>
+            <input type="text" class="name" value="Плательщик:"/>
+            <input type="text" class="data" placeholder="Банк: счёт"/>
           </div>
         </div>
         <div class="block">
           <div class="item">
-            <input type="text" value="Плательщик: Название фирмы"/>
+            <input type="text" class="name" value="Плательщик:"/>
+            <input type="text" class="data" placeholder="Название фирмы"/>
           </div>
           <div class="item">
-            <input type="text" value="Рег. номер: 123456789"/>
+            <input type="text" class="name" value="Рег. номер:"/>
+            <input type="text" class="data" placeholder="123456789"/>
           </div>
           <div class="item">
-            <input type="text" value="Дата счёта: " id="invNowDate"/>
+            <input type="text" class="name" value="Дата счёта:"/>
+            <input type="text" class="data datePick" id="invNowDate"/>
           </div>
           <div class="item">
-            <input type="text" value="Срок оплаты: " id="invNewDate"/>
+            <input type="text" class="name" value="Срок оплаты:"/>
+            <input type="text" class="data datePick" id="invNewDate"/>
           </div>
         </div>
       </section>
