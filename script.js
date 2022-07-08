@@ -7,8 +7,8 @@ let iDate = () =>{
   nDate = new Date();
 
   nowDate  = nDate;
-	nowDay   = nowDate.getDate();
-	nowMonth = nowDate.getMonth()+1;
+  nowDay   = nowDate.getDate();
+  nowMonth = nowDate.getMonth()+1;
   nowYear  = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
@@ -17,8 +17,8 @@ let iDate = () =>{
 
   nDate.setDate(nDate.getDate()+7);
   nowDate = nDate;
-	nowDay   = nowDate.getDate();
-	nowMonth = nowDate.getMonth()+1;
+  nowDay   = nowDate.getDate();
+  nowMonth = nowDate.getMonth()+1;
   nowYear  = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
@@ -91,7 +91,7 @@ let calculation = () =>{
     let cTot = cSum + cTax;
     document.getElementById('cTot').innerHTML = cTot;
   };
-	format2Dec();
+  format2Dec();
 };
 
 let bindCalc = function (){
