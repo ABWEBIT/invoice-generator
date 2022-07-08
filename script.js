@@ -6,10 +6,10 @@ let iDate = () =>{
   invNewDate = document.getElementById('invNewDate');
   nDate = new Date();
 
-  nowDate = nDate;
-  nowDay = nowDate.getDate();
-  nowMonth = nowDate.getMonth()+1;
-  nowYear = nowDate.getFullYear();
+  nowDate  = nDate;
+	nowDay   = nowDate.getDate();
+	nowMonth = nowDate.getMonth()+1;
+  nowYear  = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
   if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
@@ -17,13 +17,14 @@ let iDate = () =>{
 
   nDate.setDate(nDate.getDate()+7);
   nowDate = nDate;
-  nowDay = nowDate.getDate();
-  nowMonth = nowDate.getMonth()+1;
-  nowYear = nowDate.getFullYear();
+	nowDay   = nowDate.getDate();
+	nowMonth = nowDate.getMonth()+1;
+  nowYear  = nowDate.getFullYear();
 
   if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
   if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
   invNewDate.value += nowDay+'/'+nowMonth+'/'+nowYear;
+
 };
 iDate();
 
@@ -45,7 +46,7 @@ format2Dec();
 let invoiceNumber = () =>{
   let iNumber,d,yer,mth,day,hrs,min,sec,mil;
   iNumber = document.getElementById('iNumber');
-  d   = new Date();
+  d = new Date();
   yer = d.getFullYear(); // not used
   mth = d.getMonth()+1;
   day = d.getDate();
@@ -90,7 +91,7 @@ let calculation = () =>{
     let cTot = cSum + cTax;
     document.getElementById('cTot').innerHTML = cTot;
   };
-  format2Dec();
+	format2Dec();
 };
 
 let bindCalc = function (){
@@ -181,6 +182,7 @@ bCur.addEventListener('input',function(){
 let tax = function (){
   let pTax = document.getElementById('pTax');
   let iTax = document.getElementById('iTax').value;
+
   if(iTax > 0){
     document.getElementById('rTax').classList.add('on');
     pTax.innerHTML = iTax;
@@ -197,3 +199,120 @@ bTax.addEventListener('input',function(){
   tax();
   calculation();
 });
+
+/* calendar */
+let eID,calendar,date,cYear,cMonth,cDay,totalDays,firstDay,daysList,init = 0;
+
+const monthNames = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Обктябрь','Ноябрь','Декабрь'];
+const daysNames = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const navButtons = ['calendarPrev','calendarNext'];
+
+let initCalender = function(){
+  let template = `
+  <section id="calender" class="noPrint">
+    <div id="calendarTop">
+      <div id="calendarPrev">&lang;</div>
+      <div id="month"></div>
+      <div id="calendarNext">&rang;</div>
+    </div>
+    <div id="daysNames"></div>
+    <div id="days"></div>
+    <div id="calendarClose">ЗАКРЫТЬ</div>
+  </section>`;
+  document.querySelector('#hMid .block').insertAdjacentHTML('beforeend', template);
+
+  for(let d of daysNames){
+    let div = document.createElement('div');
+    div.innerText = d;
+    document.getElementById('daysNames').appendChild(div);
+  };
+  for(let b of navButtons){
+    document.getElementById(b).addEventListener('click',function(){
+      if(b === 'calendarPrev'){
+        cMonth--;
+        if(cMonth < 0){cMonth = 11;cYear --;};
+      }
+      else if(b === 'calendarNext'){
+        cMonth++;
+        if(cMonth > 11){cMonth = 0;cYear++;};
+      }
+      renderCalender();
+    });
+  };
+  document.getElementById('calendarClose').addEventListener('click', function(){
+    init = 0;
+    document.getElementById('calender').remove();
+  });
+
+  date = new Date();
+  cYear = date.getFullYear();
+  cMonth = date.getMonth();
+  init = 1;
+};
+
+let renderCalender = function(e){
+  daysList = [];
+
+  if(init === 1){
+    document.getElementById('month').innerHTML = '';
+    document.getElementById('days').innerHTML = '';
+  };
+
+  if(typeof e !== 'undefined') eID = e.id;
+
+  let monthDays = (y,m) => new Date(y,m+1,0).getDate();
+  totalDays = monthDays(cYear,cMonth);
+
+  document.getElementById('month').innerText = `${monthNames[cMonth]}, ${cYear}`;
+  firstDay = new Date(cYear,cMonth,0).getDay();
+
+  for(let i = 0; i < firstDay; i++){
+    daysList.push(0);
+  };
+
+  for(let i = 1; i <= totalDays; i++){
+    daysList.push(i);
+  };
+
+  for(let d of daysList){
+    let b = document.createElement('div');
+    if(cMonth == date.getMonth() && d == date.getDate() && cYear == date.getFullYear()){
+      b.classList.add('active');
+    };
+    if(d === 0){
+      b.innerText = '';
+      b.classList.add('empty');
+    }
+    else b.innerText = `${d}`;
+
+    document.getElementById('days').appendChild(b);
+  };
+
+  let iDay = document.getElementById('days').getElementsByTagName('div');
+
+  for(let el of iDay){
+    el.addEventListener('click', function(){
+      let fDay,fMonth,fYear;
+      fDay = el.textContent;
+      fMonth = cMonth + 1;
+      fYear = cYear;
+
+      if(fDay.toString().length === 1) fDay='0'+fDay;
+      if(fMonth.toString().length === 1) fMonth='0'+fMonth;
+
+      let formatDate = [fDay,fMonth,fYear].join('/');
+      document.getElementById(eID).value = formatDate;
+      document.getElementById('calender').remove();
+      init = 0;
+    });
+  };
+};
+
+let datePick = document.getElementsByClassName('datePick');
+
+for(let el of datePick){
+  el.addEventListener('click', function(){
+    if(init === 0) initCalender();
+    renderCalender(el);
+  });
+};
