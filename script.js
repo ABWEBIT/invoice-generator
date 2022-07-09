@@ -1,32 +1,23 @@
 'use strict';
 /* date */
-let iDate = () =>{
-  let nDate,nowDate,nowDay,nowMonth,nowYear,invNowDate,invNewDate;
-  invNowDate = document.getElementById('invNowDate');
-  invNewDate = document.getElementById('invNewDate');
-  nDate = new Date();
+/* date */
+(()=>{
+  let date,day,month,year;
+  date = new Date();
+  let gen = () =>{
+    day   = date.getDate();
+    month = date.getMonth()+1;
+    year  = date.getFullYear();
+    day = day.toString().length === 1 ? '0'+day : day;
+    month = month.toString().length === 1 ? '0'+month : month;
+  };
+  gen();
+  document.getElementById('invNowDate').value += day+'/'+month+'/'+year;
 
-  nowDate  = nDate;
-  nowDay   = nowDate.getDate();
-  nowMonth = nowDate.getMonth()+1;
-  nowYear  = nowDate.getFullYear();
-
-  if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
-  if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
-  invNowDate.value += nowDay+'/'+nowMonth+'/'+nowYear;
-
-  nDate.setDate(nDate.getDate()+7);
-  nowDate = nDate;
-  nowDay   = nowDate.getDate();
-  nowMonth = nowDate.getMonth()+1;
-  nowYear  = nowDate.getFullYear();
-
-  if(nowDay.toString().length === 1){nowDay = '0'+nowDay};
-  if(nowMonth.toString().length === 1){nowMonth = '0'+nowMonth};
-  invNewDate.value += nowDay+'/'+nowMonth+'/'+nowYear;
-
-};
-iDate();
+  date.setDate(date.getDate()+7);
+  gen();
+  document.getElementById('invNewDate').value += day+'/'+month+'/'+year;
+})();
 
 /* format numbers */
 let num2Dec = document.getElementsByClassName('2Dec');
