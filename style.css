@@ -51,7 +51,7 @@ input{
   height:100%;
   font-family:Arial,sans-serif;
   font-size:13px;
-  display:block;
+	display:block;
   box-sizing:border-box;
   padding:8px 0;
   border:0;}
@@ -84,8 +84,8 @@ input{
   padding-left:10px;
   padding-right:10px;
   width:100%;
-  max-width:735px;
-  margin-left:auto;
+	max-width:735px;
+	margin-left:auto;
   margin-right:auto;}
 
 #menu{
@@ -191,6 +191,7 @@ input{
   flex-basis:40%;}
 
 #bMid .name{
+	overflow-wrap:break-word;
   box-sizing:border-box;
   padding:10px 0;}
 
@@ -250,6 +251,8 @@ input{
 
 /* footer */
 #footer{
+	overflow-wrap:break-word;
+  max-width:100%;
   border-top:1px solid rgb(200,200,200);
   padding:8px 0;
   margin-top:80px;}
@@ -353,8 +356,8 @@ input{
 
 @media print{
   *,*:before,*:after{
-    color:rgb(0,0,0)!important;
-    background:transparent!important;}
+	  color:rgb(0,0,0)!important;
+	  background:transparent!important;}
   .wrap{
     padding-left:0!important;
     padding-right:0!important;}
