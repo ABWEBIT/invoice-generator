@@ -129,16 +129,16 @@ rowAdd.addEventListener('click',function(){
         Описание...
       </div>
       <div class="units">
-        <input type="text" class="iUni" placeholder="шт"/>
+        <input type="text" class="iUni" placeholder="шт">
       </div>
       <div class="quantity">
-        <input type="number" class="iQua fCalc" placeholder="0"/>
+        <input type="number" class="iQua fCalc" placeholder="0">
       </div>
       <div class="price">
-        <input type="number" class="iPri fCalc" placeholder="0.00"/>
+        <input type="number" class="iPri fCalc" placeholder="0.00">
       </div>
       <div class="sum">
-        <input type="number" class="iSum 2Dec" placeholder="0.00"/>
+        <input type="number" class="iSum 2Dec" placeholder="0.00">
       </div>
     </div>
   `;
