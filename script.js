@@ -1,6 +1,5 @@
 'use strict';
 /* date */
-/* date */
 (()=>{
   let date,day,month,year;
   date = new Date();
@@ -13,7 +12,6 @@
   };
   gen();
   document.getElementById('invNowDate').value += day+'/'+month+'/'+year;
-
   date.setDate(date.getDate()+7);
   gen();
   document.getElementById('invNewDate').value += day+'/'+month+'/'+year;
