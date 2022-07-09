@@ -1,12 +1,12 @@
 'use strict';
 /* date */
 (()=>{
-  let d,day,month,year;
+  let d,year,month,day;
   d = new Date();
   let gen = () =>{
-    day   = d.getDate();
+    year = d.getFullYear();
     month = d.getMonth()+1;
-    year  = d.getFullYear();
+    day = d.getDate();
     day = day.toString().length === 1 ? '0'+day : day;
     month = month.toString().length === 1 ? '0'+month : month;
   };
@@ -21,37 +21,32 @@
 let num2Dec = document.getElementsByClassName('2Dec');
 let format2Dec = () =>{
   for(let el of num2Dec){
-    if(el.value){
-      el.value = parseFloat(Math.round(el.value * 100) / 100).toFixed(2);
-    }
-    else if(el.textContent){
-      el.textContent = parseFloat(Math.round(Number(el.textContent) * 100) / 100).toFixed(2);
-    };
+    if(el.value) el.value = parseFloat(Math.round(el.value * 100) / 100).toFixed(2);
+    else if(el.textContent) el.textContent = parseFloat(Math.round(Number(el.textContent) * 100) / 100).toFixed(2);
   };
 };
 format2Dec();
 
-/* generate invoice number */
+/* invoice number */
 let invoiceNumber = () =>{
-  let iNumber,d,yer,mth,day,hrs,min,sec,mil;
-  iNumber = document.getElementById('iNumber');
+  let d,n,year,month,day,hours,minutes,seconds,milliseconds;
   d = new Date();
-  yer = d.getFullYear(); // not used
-  mth = d.getMonth()+1;
+  year = d.getFullYear(); // not used
+  month = d.getMonth()+1;
   day = d.getDate();
-  hrs = d.getHours();
-  min = d.getMinutes();
-  sec = d.getSeconds();
-  mil = d.getMilliseconds();
-
-  if(mth.toString().length === 1){mth = '0'+mth};
-  if(day.toString().length === 1){day = '0'+day};
-  if(hrs.toString().length === 1){hrs = '0'+hrs};
-  if(min.toString().length === 1){min = '0'+min};
-  if(sec.toString().length === 1){sec = '0'+sec};
-  mil = mil.toString().slice(0,1);
-  iNumber.innerHTML = mth+day+hrs+min+sec+mil;
-  document.title = mth+day+hrs+min+sec+mil;
+  hours = d.getHours();
+  minutes = d.getMinutes();
+  seconds = d.getSeconds();
+  milliseconds = d.getMilliseconds();
+  month = month.toString().length === 1 ? '0'+month : month;
+  day = day.toString().length === 1 ? '0'+day : day;
+  hours = hours.toString().length === 1 ? '0'+hours : hours;
+  minutes = minutes.toString().length === 1 ? '0'+minutes : minutes;
+  seconds = seconds.toString().length === 1 ? '0'+seconds : seconds;
+  milliseconds = milliseconds.toString().slice(0,1);
+  n = month+day+hours+minutes+seconds+milliseconds;
+  document.getElementById('iNumber').innerHTML = n;
+  document.title = n;
 };
 invoiceNumber();
 
@@ -248,21 +243,16 @@ let renderCalender = function(e){
   };
 
   if(typeof e !== 'undefined') eID = e.id;
-
   let monthDays = (y,m) => new Date(y,m+1,0).getDate();
   totalDays = monthDays(cYear,cMonth);
-
   document.getElementById('month').innerText = `${monthNames[cMonth]}, ${cYear}`;
   firstDay = new Date(cYear,cMonth,0).getDay();
-
   for(let i = 0; i < firstDay; i++){
     daysList.push(0);
   };
-
   for(let i = 1; i <= totalDays; i++){
     daysList.push(i);
   };
-
   for(let d of daysList){
     let b = document.createElement('div');
     if(cMonth == date.getMonth() && d == date.getDate() && cYear == date.getFullYear()){
@@ -273,12 +263,10 @@ let renderCalender = function(e){
       b.classList.add('empty');
     }
     else b.innerText = `${d}`;
-
     document.getElementById('days').appendChild(b);
   };
 
   let iDay = document.getElementById('days').getElementsByTagName('div');
-
   for(let el of iDay){
     el.addEventListener('click', function(){
       let fDay,fMonth,fYear;
@@ -298,7 +286,6 @@ let renderCalender = function(e){
 };
 
 let datePick = document.getElementsByClassName('datePick');
-
 for(let el of datePick){
   el.addEventListener('click', function(){
     if(init === 0) initCalender();
