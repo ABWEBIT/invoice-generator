@@ -1,18 +1,18 @@
 'use strict';
 /* date */
 (()=>{
-  let date,day,month,year;
-  date = new Date();
+  let d,day,month,year;
+  d = new Date();
   let gen = () =>{
-    day   = date.getDate();
-    month = date.getMonth()+1;
-    year  = date.getFullYear();
+    day   = d.getDate();
+    month = d.getMonth()+1;
+    year  = d.getFullYear();
     day = day.toString().length === 1 ? '0'+day : day;
     month = month.toString().length === 1 ? '0'+month : month;
   };
   gen();
   document.getElementById('invNowDate').value += day+'/'+month+'/'+year;
-  date.setDate(date.getDate()+7);
+  d.setDate(d.getDate()+7);
   gen();
   document.getElementById('invNewDate').value += day+'/'+month+'/'+year;
 })();
