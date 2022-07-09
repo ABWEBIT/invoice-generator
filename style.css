@@ -134,6 +134,7 @@ input{
 #hMid .item input{
   padding:8px 6px;
   margin-bottom:5px;
+  margin-right:5px;
   width:100%;}
 
 #hMid .block{
@@ -275,15 +276,12 @@ input{
 #calendarClose{
   cursor:pointer;
   font-weight:bold;
-  border-top:1px solid rgb(200,200,200);
+  color:rgb(255,255,255);
+  background-color:rgb(185,50,50);
   text-align:center;
   width:100%;
   padding:5px 0;
   font-size:86%;}
-
-@media (hover: hover){
-  #calendarClose:hover{background-color:rgb(245,245,245);}
-}
 
 #calendarTop{
   font-weight:bold;
@@ -329,6 +327,8 @@ input{
 }
 
 #calender #days{
+  padding-top:5px;
+  padding-bottom:5px;
   flex:1;
   display:grid;
   grid-template-columns:repeat( 7, 1fr);
