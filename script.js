@@ -18,14 +18,13 @@
 })();
 
 /* format numbers */
-let num2Dec = document.getElementsByClassName('2Dec');
-let format2Dec = () =>{
-  for(let el of num2Dec){
+let formatNumbers = () =>{
+let Dec2 = document.getElementsByClassName('D2');
+  for(let el of Dec2){
     if(el.value) el.value = parseFloat(Math.round(el.value * 100) / 100).toFixed(2);
     else if(el.textContent) el.textContent = parseFloat(Math.round(Number(el.textContent) * 100) / 100).toFixed(2);
   };
 };
-format2Dec();
 
 /* invoice number */
 let invoiceNumber = () =>{
@@ -60,13 +59,13 @@ let calculation = () =>{
     p = el.querySelector('.iPri').value;
     if(q && p){
       s = parseFloat(Math.round((Number(q) * Number(p)) * 100) / 100).toFixed(2);
-      el.querySelector('.iSum').value = s;
+      el.querySelector('.iSum').textContent = s;
     }
-    else el.querySelector('.iSum').value = '';
+    else el.querySelector('.iSum').textContent = '0.00';
     let sumAll = document.querySelectorAll('.iSum');
     let cSum = 0;
     for(let el of sumAll){
-      cSum += Number(el.value);
+      cSum += Number(el.textContent);
     };
     let iTax = document.getElementById('iTax').value;
     if(Number(iTax) < 1) iTax = 0;
@@ -75,7 +74,7 @@ let calculation = () =>{
     let cTot = cSum + cTax;
     document.getElementById('cTot').innerHTML = cTot;
   };
-  format2Dec();
+  formatNumbers();
 };
 
 let bindCalc = () =>{
@@ -138,13 +137,13 @@ rowAdd.addEventListener('click',function(){
         <input type="number" class="iPri fCalc" placeholder="0.00">
       </div>
       <div class="sum">
-        <input type="number" class="iSum 2Dec" placeholder="0.00">
+        <div class="D2 iSum">0.00</div>
       </div>
     </div>
   `;
   bMid.insertAdjacentHTML('beforeend', template);
   bindCalc();
-  format2Dec();
+  formatNumbers();
   removeEvent();
 });
 
