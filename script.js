@@ -78,7 +78,7 @@ let calculation = () =>{
   format2Dec();
 };
 
-let bindCalc = function (){
+let bindCalc = () =>{
   let fCalc = document.getElementsByClassName('fCalc');
   for(let el of fCalc){
     el.addEventListener('input', function(){
@@ -102,7 +102,7 @@ numRef.addEventListener('click',function(){
 });
 
 /* remove row */
-let removeEvent = function (){
+let removeEvent = () =>{
   let removeRow = document.getElementsByClassName('remove');
   for(let el of removeRow){
     el.addEventListener('click', function(){
@@ -149,7 +149,7 @@ rowAdd.addEventListener('click',function(){
 });
 
 /* currency */
-let currency = function (){
+let currency = () =>{
   let pCur = document.getElementsByClassName('pCur');
   for(let el of pCur){
     el.innerHTML = document.getElementById('iCur').value;
@@ -163,7 +163,7 @@ bCur.addEventListener('input',function(){
 });
 
 /* tax */
-let tax = function (){
+let tax = () =>{
   let pTax = document.getElementById('pTax');
   let iTax = document.getElementById('iTax').value;
 
@@ -191,7 +191,7 @@ const monthNames = ['Январь','Февраль','Март','Апрель','�
 const daysNames = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
 const navButtons = ['calendarPrev','calendarNext'];
 
-let initCalender = function(){
+let initCalender = () =>{
   let template = `
   <section id="calender" class="noPrint">
     <div id="calendarTop">
@@ -234,7 +234,7 @@ let initCalender = function(){
   init = 1;
 };
 
-let renderCalender = function(e){
+let renderCalender = (e) =>{
   daysList = [];
 
   if(init === 1){
