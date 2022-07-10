@@ -370,8 +370,8 @@ input{
   #hMid .item input{
     padding:4px 0;
     margin-bottom:0!important;}
-  #invBody .empty,
-  #invBody .remove{
+  #bMid .empty,
+  #bMid .remove{
     visibility:hidden;}
   .noPrint{
     display:none!important;}
