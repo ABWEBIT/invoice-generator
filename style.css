@@ -214,11 +214,14 @@ input{
 #body .price input{
   text-align:right;}
 
-#body .sum{flex-basis:20%;}
-
-#body .sum,
-#body .sum input{
+#body .sum{
+  flex-basis:20%;
   text-align:right;}
+
+#bMid .sum{
+  justify-content:flex-end;
+  display:flex;
+  padding:10px 0;}
 
 /* rows add */
 #rowAdd{
