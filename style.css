@@ -167,7 +167,6 @@ input{
 #body .remove{cursor:pointer;}
 
 #bTop{
-  font-weight:bold;
   display:flex;
   padding:8px 0;
   border-top:1px solid rgb(200,200,200);
@@ -247,8 +246,6 @@ input{
 #bBot #rTax .data{
   border-bottom:1px solid rgb(200,200,200);}
 
-#bBot #rTot{font-weight:bold;}
-
 #bBot .data{
   justify-content:flex-end;
   display:flex;}
@@ -281,7 +278,6 @@ input{
 
 #calendarClose{
   cursor:pointer;
-  font-weight:bold;
   color:rgb(255,255,255);
   background-color:rgb(185,50,50);
   text-align:center;
@@ -290,7 +286,6 @@ input{
   font-size:86%;}
 
 #calendarTop{
-  font-weight:bold;
   font-size:14px;
   display:flex;
   align-items:center;
@@ -301,7 +296,6 @@ input{
   cursor:default;
   text-align:center;
   font-size:12px;
-  font-weight:bold;
   display:flex;
   border-bottom:1px solid rgb(200,200,200);}
 
