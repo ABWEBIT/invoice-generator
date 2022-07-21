@@ -1,21 +1,42 @@
 'use strict';
 /* date */
-(()=>{
-  let d,year,month,day;
-  d = new Date();
-  let gen = () =>{
-    year = d.getFullYear();
-    month = d.getMonth()+1;
-    day = d.getDate();
-    day = day.toString().length === 1 ? '0'+day : day;
-    month = month.toString().length === 1 ? '0'+month : month;
-  };
-  gen();
-  document.getElementById('invNowDate').value += day+'/'+month+'/'+year;
-  d.setDate(d.getDate()+7);
-  gen();
-  document.getElementById('invNewDate').value += day+'/'+month+'/'+year;
-})();
+class iDate{
+  constructor(){
+    this.d = new Date();
+    this.year = this.d.getFullYear();
+    this.month = this.d.getMonth()+1;
+    this.day = this.d.getDate();
+    this.hours = this.d.getHours();
+    this.minutes = this.d.getMinutes();
+    this.seconds = this.d.getSeconds();
+    this.milliseconds = this.d.getMilliseconds();
+
+    this.month = this.month.toString().length === 1 ? '0'+this.month : this.month;
+    this.day = this.day.toString().length === 1 ? '0'+this.day : this.day;
+    this.hours = this.hours.toString().length === 1 ? '0'+this.hours : this.hours;
+    this.minutes = this.minutes.toString().length === 1 ? '0'+this.minutes : this.minutes;
+    this.seconds = this.seconds.toString().length === 1 ? '0'+this.seconds : this.seconds;
+  }
+  dNow(){
+    return this.day+'/'+this.month+'/'+this.year;
+  }
+  dNew(){
+    this.d.setDate(this.d.getDate() + 7);
+    this.year = this.d.getFullYear();  
+    this.month = this.d.getMonth()+1;
+    this.day = this.d.getDate();
+    this.day = this.day.toString().length === 1 ? '0'+this.day : this.day;
+    this.month = this.month.toString().length === 1 ? '0'+this.month : this.month;
+    return this.day+'/'+this.month+'/'+this.year;
+  }
+  iNumber(){
+    this.milliseconds = this.milliseconds.toString().slice(0,1);
+    return this.month+this.day+this.hours+this.minutes+this.seconds+this.milliseconds;
+  }
+};
+
+document.getElementById('invNowDate').value += new iDate().dNow();
+document.getElementById('invNewDate').value += new iDate().dNew();
 
 /* format numbers */
 let formatNumbers = () =>{
@@ -28,24 +49,8 @@ let Dec2 = document.getElementsByClassName('D2');
 
 /* invoice number */
 let invoiceNumber = () =>{
-  let d,n,year,month,day,hours,minutes,seconds,milliseconds;
-  d = new Date();
-  year = d.getFullYear(); // not used
-  month = d.getMonth()+1;
-  day = d.getDate();
-  hours = d.getHours();
-  minutes = d.getMinutes();
-  seconds = d.getSeconds();
-  milliseconds = d.getMilliseconds();
-  month = month.toString().length === 1 ? '0'+month : month;
-  day = day.toString().length === 1 ? '0'+day : day;
-  hours = hours.toString().length === 1 ? '0'+hours : hours;
-  minutes = minutes.toString().length === 1 ? '0'+minutes : minutes;
-  seconds = seconds.toString().length === 1 ? '0'+seconds : seconds;
-  milliseconds = milliseconds.toString().slice(0,1);
-  n = month+day+hours+minutes+seconds+milliseconds;
-  document.getElementById('iNumber').innerHTML = n;
-  document.title = n;
+  document.getElementById('iNumber').innerHTML = new iDate().iNumber();
+  document.title = new iDate().iNumber();
 };
 invoiceNumber();
 
@@ -226,7 +231,6 @@ let initCalender = () =>{
     init = 0;
     document.getElementById('calender').remove();
   });
-
   date = new Date();
   cYear = date.getFullYear();
   cMonth = date.getMonth();
