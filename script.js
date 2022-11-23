@@ -31,7 +31,7 @@ class iDate{
   }
   iNumber(){
     this.milliseconds = this.milliseconds.toString().slice(0,1);
-    return this.month+this.day+this.hours+this.minutes+this.seconds+this.milliseconds;
+    return this.month+''+this.day+''+this.hours+''+this.minutes+''+this.seconds+''+this.milliseconds;
   }
 };
 
